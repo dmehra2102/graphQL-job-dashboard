@@ -1,3 +1,4 @@
+import { getCompany } from "./db/companies.js";
 import { getJobs } from "./db/jobs.js";
 
 export const resolvers = {
@@ -5,8 +6,10 @@ export const resolvers = {
     jobs: () => getJobs(),
   },
 
+  // This resolver function will get the most priority
   Job: {
     date: (job) => toIsoDate(job.createdAt),
+    company: (job) => getCompany(job.companyId),
   },
 };
 
