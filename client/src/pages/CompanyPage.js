@@ -15,6 +15,7 @@ function CompanyPage() {
     (async () => {
       try {
         const company = await getCompany(companyId);
+        console.log(company);
         setState({ company: company, loading: false, error: false });
       } catch (error) {
         setState({ company: null, loading: false, error: true });
@@ -22,8 +23,8 @@ function CompanyPage() {
     })();
   }, [companyId]);
 
-  if (!state.loading) return <div>Loading data....</div>;
-  if (state.error) {
+  if (state.loading) return <div>Loading data....</div>;
+  if (state.error || !state.company) {
     return <div className="has-text-danger">Data unavaialble</div>;
   }
   return (

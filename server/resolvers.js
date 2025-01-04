@@ -1,6 +1,6 @@
 import { getCompany } from "./db/companies.js";
-import { getJob, getJobs, getJobsByCompany } from "./db/jobs.js";
 import { notFoundError, toIsoDate } from "./utils.js";
+import { createJob, getJob, getJobs, getJobsByCompany } from "./db/jobs.js";
 
 export const resolvers = {
   Query: {
@@ -15,6 +15,14 @@ export const resolvers = {
       return job;
     },
     jobs: () => getJobs(),
+  },
+
+  Mutation: {
+    createJob: (_root, args) => {
+      const companyId = "FjcJCHJALA4i";
+      const { title, description } = args;
+      return createJob({ companyId, title, description });
+    },
   },
 
   Company: {
